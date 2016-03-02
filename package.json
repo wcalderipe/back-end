@@ -1,0 +1,23 @@
+{
+  "name": "vamosJuntasAPI",
+  "version": "1.0.0",
+  "description": "This is a project to have API for VamosJuntas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VamosJuntas/back-end.git"
+  },
+  "author": "vamosJuntas Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VamosJuntas/back-end/issues"
+  },
+  "homepage": "https://github.com/VamosJuntas/back-end",
+  "dependencies": {
+    "mongoose": "^4.4.5",
+    "restify": "^4.0.4"
+  }
+}
