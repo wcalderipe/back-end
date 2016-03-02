@@ -19,5 +19,9 @@
   "dependencies": {
     "mongoose": "^4.4.5",
     "restify": "^4.0.4"
+  },
+  "devDependencies": {
+    "frisby": "^0.8.5",
+    "jasmine-node": "^1.14.5"
   }
 }
