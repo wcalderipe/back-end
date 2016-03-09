@@ -5,7 +5,12 @@ var server = restify.createServer({
 });
 
 server.get('/risks-around',function (request, response, next) {
-  response.send('');
+  response.send([{
+    address: "Rua Ipiranga",
+    long: "111122",
+    lat: "222222",
+    risks: 10
+  }]);
   next();
 })
 
