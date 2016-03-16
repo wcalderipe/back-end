@@ -1,17 +1,17 @@
 var restify = require('restify');
-var Risk = require('./risk.model');
+var Place = require('./place.model');
 
 var server = restify.createServer({
   name: 'VamosJuntas',
 });
 
 server.get('/risks-around',function (request, response) {
-  Risk.find(function (err, risks) {
+  Place.find(function (err, places) {
     if (err) {
       return console.error(err);
     }
-    console.log(risks);
-    return response.send(risks);
+    console.log(places);
+    return response.send(places);
   });
 })
 
