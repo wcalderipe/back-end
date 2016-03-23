@@ -1,4 +1,5 @@
 var restify = require('restify');
+var database = require('./db.connection');
 var Place = require('./place.model');
 
 var server = restify.createServer({
@@ -16,5 +17,6 @@ server.get('/risks-around',function (request, response) {
 })
 
 server.listen(8080, function() {
+  database.open();
 	console.log('Hello World! :D');
 });
