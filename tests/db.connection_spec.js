@@ -1,5 +1,4 @@
-var db = require('../db.connection');
-
+var db = require('../src/db.connection');
 var mongoose = require('mongoose');
 
 describe('db connection', function () {
