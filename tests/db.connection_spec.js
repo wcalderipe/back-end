@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 describe('db connection', function () {
   describe('open', function () {
     it('connect to vamosjuntas database', function () {
-      spyOn(mongoose, 'connect').andCallThrough();
+      spyOn(mongoose, 'connect');
 
       db.open();
 
@@ -14,7 +14,7 @@ describe('db connection', function () {
 
   describe('close', function () {
     it('disconnect from vamosjuntas database', function () {
-      spyOn(mongoose, 'disconnect').andCallThrough();
+      spyOn(mongoose, 'disconnect');
 
       db.close();
 
