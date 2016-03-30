@@ -11,10 +11,14 @@ module.exports = {
     server.use(restify.queryParser());
 
     server.get('/risks-around', function (request, response) {
+      if (Object.keys(request.params).length === 0) {
+        return response.send(300, 'Invalid params.');
+      }
+
+      var maxDistance = 100;
       var coords = [];
       coords[0] = request.params.longitude;
       coords[1] = request.params.latitude;
-      var maxDistance = 100;
 
       Place.find({
         loc: {

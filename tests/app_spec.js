@@ -2,8 +2,8 @@ var restify = require('restify');
 var place = require('../src/place.model');
 
 describe('App', function () {
-  var server;
-  var app = require('../src/app');
+  var server, app;
+  app = require('../src/app');
 
   beforeEach(function () {
     server = createSpyObj('server', ['get', 'listen', 'use']);
@@ -29,17 +29,18 @@ describe('App', function () {
   });
 
   describe('/risks-around', function () {
-    var risks;
-    
+    var risks, request, response;
+
     beforeEach(function() {
-      var mongoResponse = createSpyObj('mongoResponse', ['exec']);
+      var mongoResponse;
+      mongoResponse = createSpyObj('mongoResponse', ['exec']);
       spyOn(place, 'find').andReturn(mongoResponse);
       app.start();
       risks = server.get.mostRecentCall.args[1];
     });
 
     it('should call mongo with the correct parameters',function() {
-      var request = {
+      request = {
         params: {
           longitude: 1.2,
           latitude: 3.4
@@ -53,6 +54,15 @@ describe('App', function () {
           $maxDistance: 100
         }
       });
+    });
+
+    it('should return a error when there is no coordinates', function() {
+      request = {params: {}};
+      response = createSpyObj('response', ['send']);
+
+      risks(request, response);
+
+      expect(response.send).toHaveBeenCalledWith(300, 'Invalid params.');
     });
   });
 });
