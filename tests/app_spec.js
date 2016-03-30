@@ -29,11 +29,13 @@ describe('App', function () {
   });
 
   describe('/risks-around', function () {
+    var risks;
+    
     beforeEach(function() {
       var mongoResponse = createSpyObj('mongoResponse', ['exec']);
       spyOn(place, 'find').andReturn(mongoResponse);
       app.start();
-      var risks = server.get.mostRecentCall.args[1];
+      risks = server.get.mostRecentCall.args[1];
     });
 
     it('should call mongo with the correct parameters',function() {
