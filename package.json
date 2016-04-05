@@ -4,6 +4,7 @@
   "description": "This is a project to have API for VamosJuntas",
   "main": "index.js",
   "scripts": {
+    "pretest": "node ./tests/test_setup.js",
     "test": "./node_modules/jasmine-node/bin/jasmine-node tests/"
   },
   "repository": {
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/VamosJuntas/back-end",
   "dependencies": {
+    "mongodb": "^2.1.14",
     "mongoose": "^4.4.5",
     "restify": "^4.0.4"
   },
