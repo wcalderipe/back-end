@@ -1,15 +1,22 @@
 var Place = require('./place.model');
-
+var isNumeric = require('is-numeric');
 module.exports = {
   risksAround: function (request, response) {
+
     if (Object.keys(request.params).length === 0) {
-      return response.send(300, 'Invalid params.');
+      return response.send(400, 'Invalid params.');
+    }
+
+    if (!isNumeric(request.params.latitude) || !isNumeric(request.params.longitude) ) {
+      return response.send(400, 'Invalid latitude or longitude.');
     }
 
     var maxDistance = 100;
     var coords = [];
     coords[0] = request.params.longitude;
     coords[1] = request.params.latitude;
+
+    console.log("coords: " + coords);
 
     Place.find({
       loc: {
@@ -21,6 +28,12 @@ module.exports = {
         return console.error(err);
       }
       console.log(places);
+      console.log(places.length);
+
+      if (places.length === 0) {
+          return response.status(204).json(places);
+      }
+
       return response.send(places);
     });
   }

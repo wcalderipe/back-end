@@ -62,7 +62,7 @@ describe('App', function () {
 
       risks(request, response);
 
-      expect(response.send).toHaveBeenCalledWith(300, 'Invalid params.');
+      expect(response.send).toHaveBeenCalledWith(400, 'Invalid params.');
     });
   });
 });

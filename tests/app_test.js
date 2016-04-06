@@ -14,7 +14,7 @@ module.exports = {
     server.get('/risks-around', services.risksAround);
 
     server.listen(port, function() {
-      database.open('app');
+      database.open('test');
     	console.log('Vamos Juntas Start :D');
     });
   }
