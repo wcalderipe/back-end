@@ -31,7 +31,7 @@ module.exports = {
       console.log(places.length);
 
       if (places.length === 0) {
-          return response.status(204).json(places);
+          return response.send(204);
       }
 
       return response.send(places);

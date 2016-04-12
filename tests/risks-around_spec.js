@@ -16,5 +16,4 @@ frisby.create('Search around a place')
 frisby.create('Should fail gracefully when latitude and longitude does not exists')
     .get('http://localhost:8080/risks-around?latitude=90&longitude=90')
     .expectStatus(204)
-    .expectHeaderContains('content-type', 'application/json')
     .toss();

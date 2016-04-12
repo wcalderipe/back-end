@@ -5,6 +5,7 @@ var port = process.env.VAMOS_JUNTAS_PORT || 8080;
 
 module.exports = {
   start: function () {
+
     var server = restify.createServer({
       name: 'VamosJuntas'
     });
@@ -14,7 +15,7 @@ module.exports = {
     server.get('/risks-around', services.risksAround);
 
     server.listen(port, function() {
-      database.open('app');
+      database.open();
     	console.log('Vamos Juntas Start :D');
     });
   }
