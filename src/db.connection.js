@@ -8,7 +8,7 @@ var connectionURL = {
 var open = function (mode) {
   var enviroment = process.env.NODE_ENV;
   var connection;
-  
+
   mongoose.connect(connectionURL[enviroment]);
   connection = mongoose.connection;
   connection.on('error', console.error.bind(console, 'connection error:'));
