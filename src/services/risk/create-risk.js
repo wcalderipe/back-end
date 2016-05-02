@@ -21,6 +21,11 @@
 //  ]
 // }
 
-module.exports = function (title){
-
+module.exports = function (req, res, next){
+  // validate
+  // insert into mongodb
+  // return success
+  console.log(req.params)
+  res.json(201, req.params);
+  return next();
 };

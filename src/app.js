@@ -11,8 +11,10 @@ module.exports = {
     });
 
     server.use(restify.queryParser());
+    server.use(restify.bodyParser());
 
     server.get('/risks-around', risk.risksAround);
+    server.post('/risk', risk.createRisk);
 
     server.listen(port, function() {
       database.open();

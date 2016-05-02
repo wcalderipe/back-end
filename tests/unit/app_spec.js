@@ -6,7 +6,7 @@ describe('App', function () {
   app = require('../../src/app');
 
   beforeEach(function () {
-    server = createSpyObj('server', ['get', 'listen', 'use']);
+    server = createSpyObj('server', ['get', 'post', 'listen', 'use']);
     spyOn(restify, 'createServer').andReturn(server);
     spyOn(restify, 'queryParser').andReturn(jasmine.any(Function));
   });
