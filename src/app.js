@@ -14,7 +14,7 @@ module.exports = {
     server.use(restify.bodyParser());
 
     server.get('/risks-around', risk.risksAround);
-    server.post('/risk', risk.createRisk);
+    server.post('/risk', risk.reportRisk);
 
     server.listen(port, function() {
       database.open();

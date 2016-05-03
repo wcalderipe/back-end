@@ -1,4 +1,4 @@
 module.exports = {
-  createRisk: require('./create-risk.js'),
+  reportRisk: require('./report-risk.js'),
   risksAround: require('./risks-around.js')
 };
