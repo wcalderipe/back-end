@@ -6,23 +6,28 @@ describe('Create a new risk report', function () {
   var restifyMock;
 
   beforeEach(function() {
-    request = {};
-    response = { json: function(){} };
-    restifyMock = { next: function(){} };
+    restifyMock = {
+      next: function(){},
+      response: { json: function(){} },
+      request: {}
+    };
   });
 
   it('Should call response json',function() {
-    spyOn(response, 'json');
+    spyOn(restifyMock.response, 'json');
 
-    reportRisk(request, response, restifyMock.next);
-    expect(response.json).toHaveBeenCalled();
+    reportRisk(restifyMock.request, restifyMock.response, restifyMock.next);
+    expect(restifyMock.response.json).toHaveBeenCalled();
   });
 
   it('Should call next after report creation',function() {
 
     spyOn(restifyMock, 'next');
-    reportRisk(request, response, restifyMock.next);
+    reportRisk(restifyMock.request, restifyMock.response, restifyMock.next);
     expect(restifyMock.next).toHaveBeenCalled();
+  });
+
+  it('Should search place mongoose',function() {
   });
 
 });
