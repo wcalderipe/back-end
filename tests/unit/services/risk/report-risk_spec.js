@@ -21,13 +21,27 @@ describe('Create a new risk report', function () {
   });
 
   it('Should call next after report creation',function() {
-
     spyOn(restifyMock, 'next');
+
     reportRisk(restifyMock.request, restifyMock.response, restifyMock.next);
     expect(restifyMock.next).toHaveBeenCalled();
   });
 
   it('Should search place mongoose',function() {
+    reportRisk(request, response, restifyMock.next);
+    expect(restifyMock.next).toHaveBeenCalled();
+  });
+
+  it('Should validate data before inserting new risk',function() {
+  });
+
+  it('Should find place address before inserting new risk',function() {
+  });
+
+  it('Should insert place address if not found',function() {
+  });
+
+  it('Should insert risk report in the place address',function() {
   });
 
 });
