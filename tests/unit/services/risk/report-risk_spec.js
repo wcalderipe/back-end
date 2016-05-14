@@ -1,7 +1,6 @@
 var reportRisk = require('../../../../src/services/risk/report-risk.js');
-var Place = require('../../../../src/place.model.js');
 var mongoose = require('mongoose');
-//var mockgoose = require('mockgoose');
+var mockgoose = require('mockgoose');
 
 describe('Create a new risk report', function () {
   var request;
@@ -14,10 +13,21 @@ describe('Create a new risk report', function () {
       response: { json: function(){} },
       request: {}
     };
+
+    mockgoose(mongoose).then(function() {
+      mongoose.connect('', function(err) {
+        done(err);
+      });
+    });
   });
 
+  afterEach(function() {
+    mockgoose.reset();
+    mongoose.connection.close();
+  })
+
   it('Should call response json',function() {
-    spyOn(restifyMock.response, 'json');
+    spyOn(response, 'json');
 
     reportRisk(restifyMock.request, restifyMock.response, restifyMock.next);
     expect(restifyMock.response.json).toHaveBeenCalled();
@@ -56,13 +66,12 @@ describe('Create a new risk report', function () {
     };
 
     var promiseSave = reportRisk.create(requestJson);
-    expect(promiseSave instanceof require('mpromise')).toBe(true);
 
-    promiseSave.then(function() {
-      expect(true).toBe(true);
+    promiseSave.then(function(place) {
+      expect(place).not.toBeUndefined();
       done();
-    }).catch(function() {
-      expect(true).toBe(false);
+    }, function() {
+      fail("should save a new risk");
       done();
     });
   });
