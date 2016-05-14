@@ -1,4 +1,7 @@
 var reportRisk = require('../../../../src/services/risk/report-risk.js');
+var Place = require('../../../../src/place.model.js');
+var mongoose = require('mongoose');
+//var mockgoose = require('mockgoose');
 
 describe('Create a new risk report', function () {
   var request;
@@ -35,13 +38,33 @@ describe('Create a new risk report', function () {
   it('Should validate data before inserting new risk',function() {
   });
 
-  it('Should find place address before inserting new risk',function() {
-  });
+  it('Should create risk',function(done) {
+    var requestJson = {
+      "address": "Av. Ipiranga",
+      "location": {
+        "latitude": 10,
+        "longitude": 20
+      },
+      "occurrences": [{
+        "risk": "Roubo",
+        "count": 1,
+        "reports": [{
+          "date": "10/10/2016",
+          "period": "Manhã"
+        }]
+      }]
+    };
 
-  it('Should insert place address if not found',function() {
-  });
+    var promiseSave = reportRisk.create(requestJson);
+    expect(promiseSave instanceof require('mpromise')).toBe(true);
 
-  it('Should insert risk report in the place address',function() {
+    promiseSave.then(function() {
+      expect(true).toBe(true);
+      done();
+    }).catch(function() {
+      expect(true).toBe(false);
+      done();
+    });
   });
 
 });

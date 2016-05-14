@@ -1,72 +1,48 @@
-// Estrutura do JSON get
-// {
-//  "title": "Chafariz da Rendenção",
-//  "occurrences": [{
-//      "address": "Avenida Ipiranga",
-//      "risk": "Local Deserto",
-//      "date": "10/10/2015",
-//      "period":"Manhã",
-//      "numberOfOccurrences": 3
-//    }, {
-//      "risk": "Mal Iluminado",
-//      "date": "10/10/2015",
-//      "period":"Manhã",
-//      "numberOfOccurrences": 6
-//    }, {
-//      "risk": "roubo",
-//      "date": "10/10/2015",
-//      "period":"Manhã",
-//      "numberOfOccurrences": 6
-//    }
-//  ]
-// }
+// [{
+//   "address": "Av. Ipiranga",
+//   "location": {
+//     "latitude": 10,
+//     "longitude": 20
+//   },
+//   "occurrences": [{
+//     "risk": "Roubo",
+//     "count": 2,
+//     "reports": [
+//       {
+//       "date": "10/10/2016",
+//       "period": "Manhã"
+//     },
+//     {
+//       "date": "12/10/2016",
+//       "period": "Manhã"
+//     }]},
+//     {
+//       "risk": "Local Mal Iluminado",
+//       "count": 2,
+//       "reports": [
+//         {
+//         "date": "10/10/2016",
+//         "period": "Manhã"
+//       },
+//       {
+//         "date": "12/10/2016",
+//         "period": "Manhã"
+//       }]
+//   }]
+// }]
 
 // var db = require('../../db.connection.js');
 var Place = require('../../place.model.js');
 
-module.exports = function (req, res, next){
-  // validate
-  var query = req.params;
-  console.log(query);
+module.exports = {
+  controller: function (req, res, next) {
+    var place = this.create();
 
-  // find existing place on db
-  // insert into mongodb
-  var risk = {
-    category: "123",
-    date: new Date()
-  };
-
-  var newPlace = new Place({
-    loc: [],
-    address: "abc",
-    reports: [
-        risk
-    ]
-  });
-
-  Place.find({}, function(err, places){
-    if (err) {
-      console.log("error");
-      console.log(err);
-    }
-    else {
-      console.log("obj");
-      console.log(places.length);
-      console.log(obj);
-    }
-  });
-
-  // Place.save(function(err, data) {
-  //   if (err) {
-  //     console.log(err);
-  //   }
-  //   else {
-  //     console.log('Saved ', data);
-  //   }
-  // });
-
-  // return success
-  console.log(req.params)
-  res.json(201, req.params);
-  return next();
+    console.log(req.params)
+    res.json(201, req.params);
+    return next();
+  },
+  create: function() {
+      return new Place().save();
+  }
 };
