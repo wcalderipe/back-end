@@ -8,7 +8,8 @@
   "main": "index.js",
   "scripts": {
     "pretest": "node ./tests/test_setup.js",
-    "unit-test": "NODE_ENV=test jasmine-node --verbose tests/unit",
+    "unit-test": "jasmine-node --verbose tests/unit",
+    "integration-test": "NODE_ENV=test jasmine-node --verbose tests/integration",
     "start": "NODE_ENV=app node index.js"
   },
   "repository": {
