@@ -1,79 +1,77 @@
 var reportRisk = require('../../../../src/services/risk/report-risk.js');
-var mongoose = require('mongoose');
-var mockgoose = require('mockgoose');
+var jsonschema = require('jsonschema');
+var schema = require('./schemas/report-risk.json');
+var Place = require('../../../../src/place.model.js');
 
 describe('Create a new risk report', function () {
-  var request;
-  var response;
-  var restifyMock;
+  var isPromiseSuccess;
+  var promise = {
+    then: function(success, error) {
+      if(isPromiseSuccess) {
+        success();
+      }
+      error();
+    }
+  };;
 
   beforeEach(function() {
     restifyMock = {
-      next: function(){},
-      response: { json: function(){} },
-      request: {}
+      next: jasmine.createSpy(),
+      response: jasmine.createSpyObj('response', ['send']),
+      request: {
+        params: {
+          address: "Av. Ipiranga",
+          location: {
+            latitude: 10,
+            longitude: 20
+          },
+          occurrences: [{
+            risk: "Roubo",
+            reports: [{
+              date: "10/10/2016",
+              period: "Manhã"
+            }]
+          }]
+        }
+      }
     };
+    isPromiseSuccess = true;
 
-    mockgoose(mongoose).then(function() {
-      mongoose.connect('', function(err) {
-        done(err);
-      });
-    });
+    spyOn(Place, 'create').andReturn(promise);
   });
 
-  afterEach(function() {
-    mockgoose.reset();
-    mongoose.connection.close();
-  })
-
-  it('Should call response json',function() {
-    spyOn(response, 'json');
-
+  it('should return 201 when all data is ok', function() {
     reportRisk(restifyMock.request, restifyMock.response, restifyMock.next);
-    expect(restifyMock.response.json).toHaveBeenCalled();
+    expect(restifyMock.response.send).toHaveBeenCalledWith(201);
   });
 
-  it('Should call next after report creation',function() {
-    spyOn(restifyMock, 'next');
-
+  it('should return 400 when param address does not exists', function() {
+    request.params.address = undefined;
     reportRisk(restifyMock.request, restifyMock.response, restifyMock.next);
-    expect(restifyMock.next).toHaveBeenCalled();
+    expect(restifyMock.response.send).toHaveBeenCalledWith(400);
   });
 
-  it('Should search place mongoose',function() {
-    reportRisk(request, response, restifyMock.next);
-    expect(restifyMock.next).toHaveBeenCalled();
+  it('should return 201 after validating with jsonschema', function() {
+    spyOn(jsonschema, 'validate').andCallThrough();
+    reportRisk(restifyMock.request, restifyMock.response, restifyMock.next);
+    expect(jsonschema.validate).toHaveBeenCalledWith(restifyMock.request.params, schema);
+    expect(restifyMock.response.send).toHaveBeenCalledWith(201);
   });
 
-  it('Should validate data before inserting new risk',function() {
+  it('should call Place.create and creates a risk with success', function() {
+    reportRisk(restifyMock.request, restifyMock.response, restifyMock.next);
+
+    expect(Place.create).toHaveBeenCalledWith(restifyMock.request.params);
+    expect(restifyMock.response.send).toHaveBeenCalledWith(201);
   });
 
-  it('Should create risk',function(done) {
-    var requestJson = {
-      "address": "Av. Ipiranga",
-      "location": {
-        "latitude": 10,
-        "longitude": 20
-      },
-      "occurrences": [{
-        "risk": "Roubo",
-        "count": 1,
-        "reports": [{
-          "date": "10/10/2016",
-          "period": "Manhã"
-        }]
-      }]
-    };
+  it('should call Place.create but fail to create a risk', function() {
+    isPromiseSuccess = false;
+    reportRisk(restifyMock.request, restifyMock.response, restifyMock.next);
 
-    var promiseSave = reportRisk.create(requestJson);
-
-    promiseSave.then(function(place) {
-      expect(place).not.toBeUndefined();
-      done();
-    }, function() {
-      fail("should save a new risk");
-      done();
-    });
+    expect(Place.create).toHaveBeenCalledWith(restifyMock.request.params);
+    expect(restifyMock.response.send).toHaveBeenCalledWith(500);
   });
+
 
 });

@@ -1,12 +1,17 @@
+var jsonschema = require('jsonschema');
+var schema = require('./schemas/report-risk.json');
 var Place = require('../../place.model.js');
 
-module.exports = {
-  controller: function (req, res, next) {
-    res.json(201, req.params);
-    return next();
-  },
-  create: function() {
-    var place = new Place();
-    return place.save();
+module.exports = function (request, response, next) {
+  if (jsonschema.validate(request.params, schema).valid) {
+    Place.create(request.params)
+        .then(function() {
+          response.send(201);
+        }, function() {
+          response.send(500);
+        });
+  } else {
+    response.send(400);
   }
+  return next();
 };

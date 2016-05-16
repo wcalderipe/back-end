@@ -25,6 +25,7 @@
   "homepage": "https://github.com/VamosJuntas/back-end",
   "dependencies": {
     "is-numeric": "0.0.5",
+    "jsonschema": "^1.1.0",
     "mockgoose": "^6.0.3",
     "mongodb": "^2.1.14",
     "mongoose": "^4.4.5",

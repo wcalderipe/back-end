@@ -15,8 +15,6 @@ module.exports = function (request, response) {
   coords[0] = request.params.longitude;
   coords[1] = request.params.latitude;
 
-  console.log("coords: " + coords);
-
   Place.find({
     loc: {
       $near: coords,
