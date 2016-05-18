@@ -46,7 +46,7 @@ describe('Create a new risk report', function () {
   });
 
   it('should return 400 when param address does not exists', function() {
-    request.params.address = undefined;
+    restifyMock.request.params.address = undefined;
     reportRisk(restifyMock.request, restifyMock.response, restifyMock.next);
     expect(restifyMock.response.send).toHaveBeenCalledWith(400);
   });
