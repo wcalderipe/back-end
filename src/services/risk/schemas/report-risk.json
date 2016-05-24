@@ -16,35 +16,15 @@
       },
       "required": ["latitude", "longitude"]
     },
-    "occurrences": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "risk": {
-            "type": "string"
-          },
-          "reports": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "date": {
-                  "type": "string"
-                },
-                "period": {
-                  "type": "string"
-                }
-              },
-              "required": ["date", "period"]
-            },
-            "minItems": 1
-          }
-        },
-        "required": ["risk", "reports"]
-      },
-      "minItems": 1
+    "risk": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string"
+    },
+    "period": {
+      "type": "string"
     }
   },
-  "required": ["address", "location", "occurrences"]
+  "required": ["address", "location", "risk", "date", "period"]
 }

@@ -1,6 +1,6 @@
 var reportRisk = require('../../../../src/services/risk/report-risk.js');
 var jsonschema = require('jsonschema');
-var schema = require('./schemas/report-risk.json');
+var schema = require('../../../../src/services/risk/schemas/report-risk.json');
 var Place = require('../../../../src/place.model.js');
 
 describe('Create a new risk report', function () {
@@ -25,13 +25,9 @@ describe('Create a new risk report', function () {
             latitude: 10,
             longitude: 20
           },
-          occurrences: [{
-            risk: "Roubo",
-            reports: [{
-              date: "10/10/2016",
-              period: "Manhã"
-            }]
-          }]
+          risk: "Roubo",
+          date: "10/10/2016",
+          period: "Manhã"
         }
       }
     };
