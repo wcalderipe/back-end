@@ -1,9 +1,9 @@
 var restify = require('restify');
-var place = require('../../src/place.model');
+var place = require('../../../src/domains/place.model');
 
 describe('App', function () {
   var server, app;
-  app = require('../../src/app');
+  app = require('../../../src/app');
 
   beforeEach(function () {
     server = createSpyObj('server', ['get', 'post', 'listen', 'use']);

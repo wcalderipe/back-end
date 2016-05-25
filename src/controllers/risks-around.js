@@ -1,4 +1,4 @@
-var Place = require('../../place.model');
+var Place = require('../domains/place.model');
 var isNumeric = require('is-numeric');
 module.exports = function (request, response) {
 
@@ -33,5 +33,5 @@ module.exports = function (request, response) {
 
     return response.send(places);
   });
-  
+
 };

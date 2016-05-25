@@ -1,7 +1,7 @@
-var reportRisk = require('../../../../src/services/risk/report-risk.js');
+var reportRisk = require('../../../src/controllers/report-risk.js');
 var jsonschema = require('jsonschema');
-var schema = require('../../../../src/services/risk/schemas/report-risk.json');
-var Place = require('../../../../src/place.model.js');
+var schema = require('../../../src/controllers/schemas/report-risk.json');
+var Place = require('../../../src/domains/place.model.js');
 
 describe('Create a new risk report', function () {
   var isPromiseSuccess;
