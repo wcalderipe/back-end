@@ -1,3 +1,5 @@
+[![Build Status](https://snap-ci.com/VamosJuntas/back-end/branch/master/build_image)](https://snap-ci.com/VamosJuntas/back-end/branch/master)
+
 # VamosJuntas Backend
 
 ##Installation
