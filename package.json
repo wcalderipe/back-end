@@ -10,8 +10,8 @@
     "pretest": "node ./tests/test_setup.js",
     "unit-test": "jasmine-node --verbose tests/unit",
     "integration-test": "NODE_ENV=test node ./tests/integration/run_tests.js",
-    "test": "NODE_ENV=test ./node_modules/jasmine-node/bin/jasmine-node tests/unit/",
-    "start": "NODE_ENV=app node index.js"
+    "test": "npm run unit-test",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

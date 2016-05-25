@@ -28,7 +28,6 @@ module.exports = {
   },
 
   close: function() {
-    console.log(server);
     server.close();
     process.exit(0);
   }
