@@ -1,3 +1,4 @@
+//
 // var frisby = require('frisby');
 //
 // frisby.create('Needs latitude and logitude params')
@@ -5,6 +6,10 @@
 //   .expectStatus(400)
 //   .toss();
 //
+// frisby.create('Needs a numeric latitude and longitude')
+//   .get('http://localhost:8080/risks-around?latitude=a&longitude=b')
+//   .expectStatus(400)
+//   .toss();
 //
 // frisby.create('Search around a place')
 //   .get('http://localhost:8080/risks-around?latitude=1&longitude=2')
@@ -16,3 +21,4 @@
 //   .get('http://localhost:8080/risks-around?latitude=90&longitude=90')
 //   .expectStatus(204)
 //   .toss();
+// // adicionar dados no banco para os testes

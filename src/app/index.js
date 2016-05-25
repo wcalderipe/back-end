@@ -1,6 +1,6 @@
 var restify = require('restify');
-var database = require('./db.connection');
-var risk = require('./services/risk');
+var database = require('../db.connection');
+var controllers = require('../controllers');
 var port = process.env.VAMOS_JUNTAS_PORT || 8080;
 
 module.exports = {
@@ -11,8 +11,10 @@ module.exports = {
     });
 
     server.use(restify.queryParser());
+    server.use(restify.bodyParser());
 
-    server.get('/risks-around', risk.risksAround);
+    server.get('/risks-around', controllers.risksAround);
+    server.post('/report-risk', controllers.reportRisk);
 
     server.listen(port, function() {
       database.open();

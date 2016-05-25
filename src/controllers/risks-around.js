@@ -1,4 +1,4 @@
-var Place = require('../../place.model');
+var Place = require('../domains/place.model');
 var isNumeric = require('is-numeric');
 module.exports = function (request, response) {
 
@@ -14,8 +14,6 @@ module.exports = function (request, response) {
   var coords = [];
   coords[0] = request.params.longitude;
   coords[1] = request.params.latitude;
-
-  console.log("coords: " + coords);
 
   Place.find({
     loc: {
@@ -35,5 +33,5 @@ module.exports = function (request, response) {
 
     return response.send(places);
   });
-  
+
 };
