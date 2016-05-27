@@ -47,6 +47,7 @@ $ brew services restart mongodb
 
 Run with **npm run unit-test**
 
-### Integration (in maintanance)
+### Integration
 
+Start your local MongoDB with **brew services start mongodb**
 Run with **npm run integration-test**
