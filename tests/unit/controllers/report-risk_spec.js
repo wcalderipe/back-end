@@ -12,7 +12,7 @@ describe('Create a new risk report', function () {
       }
       error();
     }
-  };;
+  };
 
   beforeEach(function() {
     restifyMock = {
