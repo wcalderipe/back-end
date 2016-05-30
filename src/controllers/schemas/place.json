@@ -1,0 +1,37 @@
+{
+  "type": "object",
+  "properties": {
+    "loc": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "address": {
+      "type": "string"
+    },
+    "reports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "category",
+          "date"
+        ]
+      }
+    }
+  },
+  "required": [
+    "loc",
+    "address",
+    "reports"
+  ]
+}
