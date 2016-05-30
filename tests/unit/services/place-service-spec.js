@@ -24,13 +24,13 @@ describe('Place Service', function() {
   });
 
   it('should call Place.create and creates a risk with success', function(done){
-    placeService(params).should.be.fulfilled.and.notify(done);
+    placeService.create(params).should.be.fulfilled.and.notify(done);
     expect(Place.create).toHaveBeenCalledWith(params);
   });
 
   it('should call Place.create and reject when does not create a risk with success', function(done){
     isPromiseSuccess = false;
-    placeService(params).should.be.rejected.and.notify(done);
+    placeService.create(params).should.be.rejected.and.notify(done);
     expect(Place.create).toHaveBeenCalledWith(params);
   });
 });
