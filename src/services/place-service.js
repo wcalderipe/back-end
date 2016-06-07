@@ -1,5 +1,5 @@
 var Place = require('./../domains/place.model');
-var Promise = require('bluebird');
+var Promise = require('q').Promise;
 
 module.exports.create = function(params) {
   return new Promise(function(resolve, reject) {
