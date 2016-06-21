@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  mongodb:
+    build:
+      dockerfile: infrastructure/docker/Dockerfile_mongodb
+      context: .
+    ports:
+      - "27017:27017"
+    networks:
+      - vamosjuntasnetwork
+
+  test:
+    build:
+      dockerfile: infrastructure/docker/Dockerfile_nodejs
+      context: .
+    depends_on:
+      - mongodb
+    volumes:
+      - "./:/usr/vamosjuntas"
+    networks:
+      - vamosjuntasnetwork
+    command: "npm test"
+
+networks:
+  vamosjuntasnetwork:
+    driver: bridge

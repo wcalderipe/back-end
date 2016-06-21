@@ -1,0 +1,11 @@
+FROM node:5
+
+RUN mkdir /usr/vamosjuntas
+
+WORKDIR /usr/vamosjuntas
+COPY package.json package.json
+RUN npm install --verbose
+
+COPY . .
+
+CMD npm test
