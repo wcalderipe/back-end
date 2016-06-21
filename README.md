@@ -2,7 +2,7 @@
 
 # VamosJuntas Backend
 
-##Installation
+## Installation
 
 Install [Brew](http://brew.sh/) in your Mac and then install Mongo:
 
@@ -24,23 +24,32 @@ Install project dependencies:
 $npm install
 ```
 
+## Config
 
-##MongoDB
+Copy then change the config files as you need.
+
+```
+cp src/configs/default.json.dist src/configs/default.json
+cp src/configs/test.json.dist src/configs/default.json
+cp src/configs/development.json.dist src/configs/default.json
+```
+
+## MongoDB
 
 With brew and brew services installed (see above), manage Mongo with following commands:
 
-###Start
+### Start
 
 $ brew services start mongodb
 
-###Stop
+### Stop
 $ brew services stop mongodb
 
-###Restart
+### Restart
 $ brew services restart mongodb
 
 
-##Tests
+## Tests
 
 
 ### Unit
@@ -51,3 +60,17 @@ Run with **npm run unit-test**
 
 Start your local MongoDB with **brew services start mongodb**
 Run with **npm run integration-test**
+
+## Docker
+
+```
+docker-compose -f docker-compose-dev.yml build mongodb
+docker-compose -f docker-compose-dev.yml build test
+```
+
+### Tests
+
+```
+docker-compose -f docker-compose-dev.yml run test
+```
+
