@@ -8,7 +8,7 @@ describe('db connection', function () {
 
       db.open();
 
-      expect(mongoose.connect).toHaveBeenCalledWith('mongodb://localhost/vamosjuntas_test');
+      expect(mongoose.connect).toHaveBeenCalledWith('mongodb://mongodb/vamosjuntas_test');
     });
   });
 

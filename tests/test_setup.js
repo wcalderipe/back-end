@@ -1,6 +1,8 @@
+var configs = require('../src/configs')().mongodb;
 var MongoClient = require('mongodb').MongoClient;
 
-MongoClient.connect('mongodb://localhost/vamosjuntas_test',function(error, db) {
+var connectURI = 'mongodb://' + configs.host + '/' + configs.database;
+MongoClient.connect(connectURI, function(error, db) {
   if (error){
     console.log('error mongo');
   } else {

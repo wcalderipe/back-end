@@ -1,16 +1,12 @@
+var configs = require('./configs')().mongodb;
 var mongoose = require('mongoose');
 
-var connectionURL = {
-  development: 'mongodb://localhost/vamosjuntas',
-  test: 'mongodb://localhost/vamosjuntas_test',
-  production: process.env.MONGODB_URI
-};
-
-var open = function (mode) {
-  var enviroment = process.env.NODE_ENV;
+var open = function(mode) {
   var connection;
+  var configURI = 'mongodb://' + configs.host + '/' + configs.database;
+  var connectionURI = process.env.MONGODB_URI || configURI;
 
-  mongoose.connect(connectionURL[enviroment]);
+  mongoose.connect(connectionURI);
   connection = mongoose.connection;
   connection.on('error', console.error.bind(console, 'connection error:'));
   connection.once('open', console.log.bind(console, 'Connected'));
