@@ -1,4 +1,4 @@
-var configs = require('../src/configs')().mongodb;
+var configs = require('../src/configs')('test').mongodb;
 var MongoClient = require('mongodb').MongoClient;
 
 var connectURI = 'mongodb://' + configs.host + '/' + configs.database;
